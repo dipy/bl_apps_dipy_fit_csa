@@ -3,6 +3,51 @@
 
 # Dipy Reconstruction Diffusion MRI using CSA
 
+<!-- brainlife-app:begin (generated from the App manifest; edit the manifest, not this block) -->
+
+> **Fits the Constant Solid Angle (CSA) ODF model to DWI within a brain mask with DIPY dipy_fit_csa (1.1.1) and outputs peaks and derived metrics.**
+
+Runs dipy_fit_csa with --extract_pam_values, producing ODF peaks, spherical harmonic coefficients and scalar maps (for example GFA) from the CSA reconstruction. Use it to get fibre orientations for tractography or ODF-based metrics. Needs a DWI with bvals/bvecs and a brain mask.
+
+| | |
+|---|---|
+| 📥 **Inputs** | `neuro/dwi` · `neuro/mask` |
+| 📤 **Outputs** | `neuro/peaks_and_metrics` |
+| 🐳 **Container** | `brainlife/dipy:1.1.1` |
+| ⚙️ **Resources** | 8 CPUs |
+| 🔗 **Run it** | [doi.org/10.25663/bl.app.61](https://doi.org/10.25663/bl.app.61) |
+
+#### 📥 Inputs
+
+| Input | Datatype | Required | Description |
+|---|---|---|---|
+| `dwi` | `neuro/dwi` | yes | Diffusion-weighted image with bvals and bvecs. |
+| `mask` | `neuro/mask` (brain) | yes | Brain mask restricting the fit. |
+
+#### 📤 Outputs
+
+| Output | Datatype | Description |
+|---|---|---|
+| `output` | `neuro/peaks_and_metrics` | CSA peaks and metrics (peak directions and values, SH coefficients and scalar maps) from dipy_fit_csa. |
+
+<details>
+<summary><b>⚙️ Parameters</b> (4)</summary>
+
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `b0_threshold` | number | `50` | Threshold used to find b=0 directions |
+| `bvecs_tol` | number | `0.01` | Threshold used so that norm(bvec)=1 (default 0.01) |
+| `sh_order` | number | `6` | Spherical harmonics order (default 6) used in the CSA fit. |
+| `odf_to_sh_order` | number | `8` | Spherical harmonics order used for peak_from_model to compress the ODF to spherical harmonics coefficients (default 8 |
+
+</details>
+
+📚 **References used by this App:**
+- Garyfallidis E, et al. Dipy, a library for the analysis of diffusion MRI data. Front Neuroinform 8:8 (2014). [doi:10.3389/fninf.2014.00008](https://doi.org/10.3389/fninf.2014.00008)
+- Avesani P, et al. The open diffusion data derivatives, brain data upcycling via integrated publishing of derivatives and reproducible open cloud services. Sci Data 6:69 (2019). [doi:10.1038/s41597-019-0073-y](https://doi.org/10.1038/s41597-019-0073-y)
+
+<!-- brainlife-app:end -->
+
 The App uses the Constant Solid Angle (CSA) method to do a reconstruction of the diffusion-weighted magnetic resonance imaging data.
 
 ### Authors
